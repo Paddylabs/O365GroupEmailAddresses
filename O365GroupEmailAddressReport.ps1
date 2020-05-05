@@ -51,15 +51,13 @@ Function Show-Menu {
 
 }
 
+$grpDetails = @()
+
 Connect-ExchangeOnline -UserPrincipalName $UserUPN -ShowProgress $true
 
 $EmailSuffixes = (Get-AcceptedDomain).Name
-
 $Selection = Show-Menu -EmailSuffixes $EmailSuffixes
-
 $O365Groups = Get-UnifiedGroup
-
-$grpDetails = @()
 
 Foreach ($O365Group in $O365Groups) {
 
