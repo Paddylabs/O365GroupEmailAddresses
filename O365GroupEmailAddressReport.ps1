@@ -66,9 +66,9 @@ $grpDetailHash = [Ordered] @{
     PrimarySmtpAddress = $O365Group.PrimarySmtpAddress
     DisplayName        = $O365Group.DisplayName
     Alias              = $O365Group.Alias
-    # ManagedBy          = $O365Group.ManagedBy
     HiddenFromGAL      = $O365Group.HiddenFromAddressListsEnabled
     RecipientType      = $O365Group.RecipientTypeDetails
+    # ManagedBy          = $O365Group.ManagedBy
     
 }
 
