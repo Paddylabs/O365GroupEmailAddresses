@@ -73,7 +73,6 @@ $grpDetailHash = [Ordered] @{
 }
 
 $grpDetail = New-Object psobject -Property $grpDetailHash
-
 $grpDetails += $grpDetail
 
 }
