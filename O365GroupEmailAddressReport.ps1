@@ -3,10 +3,11 @@
   Lists the email address details of all your O365 Groups and exports results to an Excel Spreadsheet.
   .DESCRIPTION
   Lists the email address details of all your O365 Groups and highlights any that do not match the email address suffix you select.
+  Also this script uses the Exchange Online V2 Module which uses Modern Authentication (with or without MFA)
   .PARAMETER
-  None
+  -UserUPN The UPN of the account you wish to connect to your Exchange Online service with
   .EXAMPLE
-  O365GroupEMailAddressReport.ps1
+  O365GroupEMailAddressReport.ps1 -UPN user@tenantname.com
   .INPUTS
   None
   .OUTPUTS
@@ -14,19 +15,25 @@
   .NOTES
   Author:        Patrick Horne
   Creation Date: 04/05/20
-  Requires:      ImportExcel Module
+  Requires:      ImportExcel and ExchangeOnlineManagement Modules
   Change Log:
   V1.0:         Initial Development
+  V1.1:         Added ExchangeOnlineManagement Module / Commands
 #>
 
-#Requires -Modules ImportExcel
+#Requires -Modules ImportExcel, ExchangeOnlineManagement
+
+param (
+    [Parameter(Mandatory)]
+    [String]$UserUPN
+)
 
 Function Show-Menu {
     Param(
         [String[]]$EmailSuffixes
     )
     do {  
-        Write-Host "Please an Email Suffix"
+        Write-Host "Please choose an email suffix to report on"
         $index = 1
         foreach ($EmailSuffix in $EmailSuffixes) {    
             Write-Host "[$index] $EmailSuffix"
@@ -44,9 +51,7 @@ Function Show-Menu {
 
 }
 
-$UserCredential = Get-Credentials
-$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
-Import-PSSession $Session -DisableNameChecking
+Connect-ExchangeOnline -UserPrincipalName $UserUPN -ShowProgress $true
 
 $EmailSuffixes = (Get-AcceptedDomain).Name
 
