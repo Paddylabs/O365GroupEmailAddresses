@@ -4,6 +4,6 @@ A client I was working with had elected to use a different SMTP suffix / domain 
 
 <https://docs.microsoft.com/en-us/microsoft-365/admin/create-groups/choose-domain-to-create-groups?view=o365-worldwide>
 
-However any groups created prior to implementing that policy do not update to use the new suffix. I wanted to report on how many groups existed that did not have the preferred suffix and export to conditonal formatted excel spreadsheet. As managers love colours.
+However any groups created prior to implementing that policy do not update to use the new suffix. I wanted to report on how many groups existed that did not have the preferred suffix and export to conditonal formatted excel spreadsheet because managers love colours.
 
 Additionally I have used the new Exchange Online mgmt module which has support for Modern Authentication with or without MFA.
